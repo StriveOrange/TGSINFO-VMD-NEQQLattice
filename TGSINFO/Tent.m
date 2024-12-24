@@ -14,9 +14,9 @@ for i=1:N
     end
 end
 plot(TentX,'.')
-xlabel('维度')
-ylabel('混沌值')
+xlabel('Dimensions')
+ylabel('Chaotic values')
 figure
 hist(TentX)
-xlabel('混沌值')
-ylabel('频数')
+xlabel('Chaotic values')
+ylabel('Frequency')
