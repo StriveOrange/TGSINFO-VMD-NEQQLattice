@@ -1,18 +1,18 @@
 function [Best_Cost,Best_X,Convergence_curve]=INFO(nP,MaxIt,lb,ub,dim,fobj)
-%% Initialization（初始化）
+%% Initialization
         Cost=zeros(nP,1);
         M=zeros(nP,1);
         
         X=initialization(nP,dim,ub,lb);
         
         for i=1:nP
-           Cost(i) = fobj(X(i,:));  %目标函数
+           Cost(i) = fobj(X(i,:));  
            M(i)=Cost(i);
         end
         
-        [~, ind]=sort(Cost);        %对cost排序
-        Best_X = X(ind(1),:);       %最优X
-        Best_Cost = Cost(ind(1));   %最优cost
+        [~, ind]=sort(Cost);       
+        Best_X = X(ind(1),:);       
+        Best_Cost = Cost(ind(1));   
           
         Worst_Cost = Cost(ind(end));
         Worst_X = X(ind(end),:);
@@ -31,11 +31,11 @@ function [Best_Cost,Best_X,Convergence_curve]=INFO(nP,MaxIt,lb,ub,dim,fobj)
             
             for i=1:nP
                 
-               % Updating rule stage(更新规则)
+               % Updating rule stage
                 del=2*rand*alpha-alpha;                                                           % Eq. (5)
                 sigm=2*rand*alpha-alpha;                                                          % Eq. (9)                                          
                                                                  
-                % Select three random solution（选择三种随机解决方案）
+                % Select three random solution
                 A1=randperm(nP);
                 A1(A1==i)=[];
                 a=A1(1);b=A1(2);c=A1(3);
@@ -52,7 +52,7 @@ function [Best_Cost,Best_X,Convergence_curve]=INFO(nP,MaxIt,lb,ub,dim,fobj)
                 Wt = sum(W);
                 
                 WM1 = del.*(W(1).*(X(a,:)-X(b,:))+W(2).*(X(a,:)-X(c,:))+ ...                      % Eq. (4.1)
-                    W(3).*(X(b,:)-X(c,:)))/(Wt+1)+epsi;                                           %计算向量权重
+                    W(3).*(X(b,:)-X(c,:)))/(Wt+1)+epsi;                                           
                 
                 omg = max([M_Best M_Better M_Worst]);
                 MM = [(M_Best-M_Better) (M_Best-M_Better) (M_Better-M_Worst)];
@@ -108,7 +108,7 @@ function [Best_Cost,Best_X,Convergence_curve]=INFO(nP,MaxIt,lb,ub,dim,fobj)
                 end
                 
                 % Check if new solution go outside the search space and
-                % bring them back(检查新解决方案是否超出搜索空间并将其返回)
+                % bring them back
                 New_X= BC(u,lb,ub);
                 New_Cost = fobj(New_X);
                 
