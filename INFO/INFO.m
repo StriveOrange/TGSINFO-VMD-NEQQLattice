@@ -141,7 +141,6 @@ function [Best_Cost,Best_X,Convergence_curve]=INFO(nP,MaxIt,lb,ub,dim,fobj)
 
 end
 
-
 function X = BC(X,lb,ub) 
 Flag4ub=X>ub;
 Flag4lb=X<lb;
